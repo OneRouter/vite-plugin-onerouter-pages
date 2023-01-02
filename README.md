@@ -1,28 +1,25 @@
-# vite-plugin-next-react-router
+# vite-plugin-onerouter-pages
 
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/zoubingwu/vite-plugin-next-react-router/Test)
-![npm](https://img.shields.io/npm/v/vite-plugin-next-react-router)
-
-A Next.js style file system based routing plugin for vite, inspired by [vite-plugin-pages](https://github.com/hannoeru/vite-plugin-pages). **Requires react-router v6.**
+A Next.js style file system based routing plugin for vite, forked from [vite-plugin-next-react-router](https://github.com/zoubingwu/vite-plugin-next-react-router) (inspired by [vite-plugin-pages](https://github.com/hannoeru/vite-plugin-pages)). **Requires react-router v6. (or [@onerouter/core](https://npmjs.com/package/@onerouter/core))**
 
 ## Usage
 
 1. Install with yarn:
 
 ```sh
-yarn add vite-plugin-next-react-router -D
+yarn add @onerouter/vite-plugin-onerouter-pages -D
 ```
 
 or with pnpm
 
 ```sh
-pnpm add vite-plugin-next-react-router -D
+pnpm add @onerouter/vite-plugin-onerouter-pages -D
 ```
 
 1. Add to your `vite.config.js`
 
 ```js
-import { reactRouterPlugin } from 'vite-plugin-next-react-router';
+import { reactRouterPlugin } from '@onerouter/vite-plugin-onerouter-pages';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -51,10 +48,10 @@ export default defineConfig({
 });
 ```
 
-1. This plugin will scan you pages folder then automatically generate a routes objects and write to output so you can import them from there.
+1. This plugin will scan your pages folder then automatically generate a routes objects and write to output so you can import them from there.
 
 ```js
-import { BrowserRouter, useRoutes } from 'react-router-dom';
+import { Router, useRoutes } from '@onerouter/core';
 import { routes } from './routes'; // or use Vite's alias to simplify import path for nested components
 
 function App() {
@@ -63,9 +60,9 @@ function App() {
 }
 
 ReactDOM.render(
-  <BrowserRouter>
+  <Router>
     <App />
-  </BrowserRouter>,
+  </Router>,
   document.getElementById('root')
 );
 ```
