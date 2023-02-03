@@ -6,9 +6,16 @@ export const generateRoutesCode = ({
   staticPageMetaImports,
   pages,
 }: any) => `
+import { Text } from "react-native"
+import { useRouteError } from "@onerouter/core"
 ${layoutImport}
 ${staticPageMetaImports}
 ${pageImports}
+
+function RootErrorBoundary() {
+  const error = useRouteError();
+  return <Text>{error?.message}</Text>;
+}
 
 export const routes = [
   {
@@ -17,6 +24,7 @@ export const routes = [
     children: [
       ${routes}
     ]
+    errorElement: <RootErrorBoundary />
   }
 ]
 
