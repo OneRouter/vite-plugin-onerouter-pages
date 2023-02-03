@@ -14,7 +14,7 @@ export interface Options {
 
   /**
    * Path to the directory to search for page components.
-   * @default 'src/pages'
+   * @default 'screens'
    */
   pageDir: string;
 
