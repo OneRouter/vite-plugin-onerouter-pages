@@ -40,7 +40,7 @@ export default defineConfig({
     // this is also the default config
     reactRouterPlugin({
       async: true,
-      pageDir: 'src/pages',
+      pageDir: 'screens',
       extensions: ['js', 'jsx', 'ts', 'tsx'],
       output: './src/routes.tsx',
     }),
