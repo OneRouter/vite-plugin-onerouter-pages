@@ -6,7 +6,6 @@ export const generateRoutesCode = ({
   staticPageMetaImports,
   pages,
 }: any) => `
-import React from 'react';
 ${layoutImport}
 ${staticPageMetaImports}
 ${pageImports}
