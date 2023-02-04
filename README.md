@@ -1,6 +1,6 @@
 # @onerouter/vite-plugin-screens
 
-A Next.js style file system based routing plugin for vite, forked from [vite-plugin-next-react-router](https://github.com/zoubingwu/vite-plugin-next-react-router) (inspired by [vite-plugin-pages](https://github.com/hannoeru/vite-plugin-pages)). ** Requires [@onerouter/core](https://npmjs.com/package/@onerouter/core))**
+A Next.js style file system based routing plugin for vite, forked from [vite-plugin-next-react-router](https://github.com/zoubingwu/vite-plugin-next-react-router) (inspired by [vite-plugin-pages](https://github.com/hannoeru/vite-plugin-pages)). **Requires [@onerouter/core](https://npmjs.com/package/@onerouter/core)**
 
 ## Usage
 
