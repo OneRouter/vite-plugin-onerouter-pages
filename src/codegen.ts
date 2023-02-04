@@ -126,7 +126,7 @@ export function generateRoutesModuleCode(
 ) {
   const { imports, element } = layoutImport(options);
   const staticPageMetaImports = staticMetaImports(routes, options);
-  const pages = pageObjects(routes);
+  const screens = pageObjects(routes);
 
   return generateRoutesCode({
     layoutImport: imports,
@@ -135,7 +135,7 @@ export function generateRoutesModuleCode(
       : staticPageImports(routes, options),
     layoutElement: element,
     routes: routeObjects(routes, options),
-    pages,
+    screens,
     staticPageMetaImports,
   });
 }
