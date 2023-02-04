@@ -1,5 +1,5 @@
 {
-  "name": "@onerouter/vite-plugin-onerouter-pages",
+  "name": "@onerouter/vite-plugin-screens",
   "version": "0.6.2",
   "main": "dist/index.js",
   "module": "./dist/index.mjs",
@@ -51,12 +51,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/OneRouter/vite-plugin-onerouter-pages.git"
+    "url": "git+https://github.com/OneRouter/vite-plugin-screens.git"
   },
   "bugs": {
-    "url": "https://github.com/OneRouter/vite-plugin-onerouter-pages/issues"
+    "url": "https://github.com/OneRouter/vite-plugin-screens/issues"
   },
-  "homepage": "https://github.com/OneRouter/vite-plugin-onerouter-pages",
+  "homepage": "https://github.com/OneRouter/vite-plugin-screens",
   "sideEffect": false,
   "files": [
     "dist",
@@ -65,7 +65,10 @@
   "keywords": [
     "vite-plugin",
     "react-router",
+    "onerouter",
     "router",
-    "react"
+    "react",
+    "react-native",
+    "expo"
   ]
 }
