@@ -28,7 +28,7 @@ export const routes = [
   }
 ]
 
-export const pages = [
-  ${pages}
+export const screens = [
+  ${screens}
 ]
 `;
