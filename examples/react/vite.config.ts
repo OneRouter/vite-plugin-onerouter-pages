@@ -1,11 +1,11 @@
 import { defineConfig } from 'vite';
-import reactRefresh from '@vitejs/plugin-react';
-import { reactRouterPlugin } from 'vite-plugin-next-react-router';
+import react from '@vitejs/plugin-react';
+import { reactRouterPlugin } from 'vite-plugin-screens';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    reactRefresh(),
+    react(),
     reactRouterPlugin({
       async: true,
     }),
