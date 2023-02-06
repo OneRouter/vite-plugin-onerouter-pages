@@ -1,31 +1,56 @@
 # @onerouter/vite-plugin-screens
 
-A Next.js style file system based routing plugin for vite, forked from [vite-plugin-next-react-router](https://github.com/zoubingwu/vite-plugin-next-react-router) (inspired by [vite-plugin-pages](https://github.com/hannoeru/vite-plugin-pages)). **Requires [@onerouter/core](https://npmjs.com/package/@onerouter/core)**
+A Next.js style file system based routing plugin for vite, forked from [vite-plugin-next-react-router](https://github.com/zoubingwu/vite-plugin-next-react-router) (inspired by [vite-plugin-pages](https://github.com/hannoeru/vite-plugin-pages)). 
+
+**Requires [@onerouter/core](https://npmjs.com/package/@onerouter/core)**
 
 ## Usage
 
-1. Install with yarn:
+1. Install dependencies and devDependencies:
 
 ```sh
-yarn add @onerouter/vite-plugin-screens -D
+# dependencies
+yarn add @onerouter/core react-router-dom react-router-native
 ```
 
-or with pnpm
+The easiest way to get React Native Web working with Vite is with @tamagui/vite-plugin (whether you use it or not, make sure you add ), so it's in this example:
 
 ```sh
-pnpm add @onerouter/vite-plugin-screens -D
+# devDependencies
+yarn add @onerouter/vite-plugin-screens vite @vitejs/plugin-react @tamagui/vite-plugin -D
 ```
 
-1. Add to your `vite.config.js`
+2. Add to your `vite.config.js` (this example tested working with react-native-web, Reanimated v2.12, Moti v0.19):
 
 ```js
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
 import { reactRouterPlugin } from '@onerouter/vite-plugin-screens';
+import { tamaguiPlugin } from "@tamagui/vite-plugin";
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  define: {
+    global: "window",
+    "process.env": {},
+    "process.env.NODE_ENV": JSON.stringify(
+      process.env.NODE_ENV || "development"
+    ),
+    __DEV__: JSON.stringify(process.env.NODE_ENV === "development"),
+  },
   plugins: [
-    //...
     reactRouterPlugin(),
+    react({
+      babel: {
+        plugins: [
+          "@babel/plugin-proposal-export-namespace-from",
+          "react-native-reanimated/plugin",
+        ],
+      },
+    }),
+    tamaguiPlugin({
+      components: [], // this needs to be present, even if empty to avoid errors
+    })
   ],
 });
 ```
@@ -48,26 +73,48 @@ export default defineConfig({
 });
 ```
 
-1. This plugin will scan your screens folder then automatically generate a routes objects and write to output so you can import them from there.
+3. This plugin will scan your screens folder then automatically generate a routes array of route objects (compatible with @onerouter/core's `useRoutes` hook (for use with the `<Router />` component) and `createRouter` method (for use with `<RouterProvider />`, enabling react-router 6.63+ loaders, actions, errorElements, and many new components/hooks) and write to output (a `routes.[j|t]sx` file, not a Vite virtual module like other solutions) so you can import them from there.
+
+`<Router />` + `useRoutes()` example:
 
 ```js
-import { Router, useRoutes } from '@onerouter/core';
+import { Outlet, Router, useRoutes } from '@onerouter/core';
 import { routes } from './routes'; // or use Vite's alias to simplify import path for nested components
 
-function App() {
+function Routes() {
   const element = useRoutes(routes);
   return element;
 }
 
-ReactDOM.render(
-  <Router>
-    <App />
-  </Router>,
-  document.getElementById('root')
-);
+export default function OldSchoolRouter() {
+  return(
+    <Router>
+      <Routes>
+        <Outlet />
+      </Routes>
+    </Router>,
+  )
+};
 ```
 
-1. For some meta info you want to add to the screens, you can export a `meta` object in you screen component, and read them from `screens` objects like below:
+`<RouterProvider />` + `createRouter()` example:
+
+```js
+import { createRouterProvider, Outlet, RouterProvider }
+import { routes } from './routes';
+
+const router = createRouter(routes);
+
+export default function NewHotnessRouter() {
+  return(
+    <RouterProvider router="router">
+      <Outlet />
+    </RouterProvider>
+  )
+};
+```
+
+4. For meta info you want to add to the screens, you can export a `meta` object in you screen component, and read them from `screens` objects like below:
 
 ```js
 // screen component
@@ -81,10 +128,10 @@ export const meta = {
 }
 
 
-// Sider component
+// Menu component
 import { screens } from './routes';
 
-function Sider() {
+function Menu() {
   const menuItems = screens
     .sort(/* sort it according to meta.sort */)\
     .map(/* map them to Sider menu items */)
