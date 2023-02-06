@@ -13,7 +13,7 @@ A Next.js style file system based routing plugin for vite, forked from [vite-plu
 yarn add @onerouter/core react-router-dom react-router-native
 ```
 
-The easiest way to get React Native Web working with Vite is with @tamagui/vite-plugin (whether you use it or not, make sure you add ), so it's in this example:
+The easiest way to get React Native Web working with Vite is with @tamagui/vite-plugin (whether you actually use Tamagui or not), so it's in this example:
 
 ```sh
 # devDependencies
